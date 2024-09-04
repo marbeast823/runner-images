@@ -14,21 +14,8 @@ jobs:
     steps:
     # checkout code from repo
     - name: checkout repo
-      uses: actions/checkout@v1
-
-    - name: look for ps1 file
-      run: ls '${{ env.OUTPUT_PATH }}'
+      uses: actions/checkout@v3
         
     - name: provision virtual machine
-      env:
-        RESOURCE_GROUP: rg-githubitpro
-        RESOURCE_GROUP_REGION: westus
-        SERVER_NAME: gihtubactions
-        ADMIN_LOGIN: mar
-        VM_ADMIN_PASSWORD: Marpogi0823@
-        AZURE_SUBSCRIPTION_ID: ${{ true}}
       run: >
-        powershell -command "& '${{ env.OUTPUT_PATH }}\CreateVM.ps1'"
-        -serverName
-        -adminLogin
-        -adminPassword
+        powershell -command ./CreateVM.ps1
