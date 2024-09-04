@@ -18,4 +18,4 @@ jobs:
         
     - name: provision virtual machine
       run: >
-        powershell -command ./CreateVM.ps1
+        powershell -command ./images.CI/macos/anka/Service.Helpers.psm1
