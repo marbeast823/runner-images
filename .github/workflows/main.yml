@@ -1,21 +1,20 @@
-name: GitHub for IT Pro CI/CD Pipeline
+name: Trigger Ubuntu24.04 CI
+run-name: Ubuntu24.04 - ${{ github.event.pull_request.title }}
 
-env:
-  OUTPUT_PATH: ${{ github.workspace }}
+on:
+  pull_request_target:
+    types: labeled
+    paths:
+    - 'images/ubuntu/**'
 
-on: [push]
+defaults:
+  run:
+    shell: pwsh
 
 jobs:
-      
-  # Deploy VM in Azure
-  DeployVM:
-    runs-on: windows-latest
-
-    steps:
-    # checkout code from repo
-    - name: checkout repo
-      uses: actions/checkout@v3
-        
-    - name: provision virtual machine
-      run: >
-        powershell -command ./images.CI/macos/anka/Service.Helpers.psm1
+  Ubuntu_2404:
+    if: contains(github.event.pull_request.labels.*.name, 'CI ubuntu-all') || contains(github.event.pull_request.labels.*.name, 'CI ubuntu-2404')
+    uses: ./.github/workflows/trigger-ubuntu-win-build.yml
+    with:
+      image_type: 'ubuntu2404'
+    secrets: inherit
