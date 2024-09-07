@@ -23,12 +23,4 @@ jobs:
  
       - name: Deploy to macOS
         run: |
-          name: Add username and password
-          echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV
-          echo "PASSWORD=${{ secrets.PASSWORD }}" >> $GITHUB_ENV
- 
-      - name: Deploy
-        run: |
-          echo "Deploying with username $USERNAME and password $PASSWORD"
-          USERNAME: mar
-          PASSWORD: marpogi
+             opt/homebrew/lib/ruby/gems/3.0.0/gems/digest-crc-0.6.5/digest-crc.gemspec","licenseConcluded":"NOASSERTION","licenseDeclared":"NOASSERTION","copyrightText":"NOASSERTION","externalRefs":[{"referenceCategory":"PACKAGE-MANAGER","referenceType":"purl","referenceLocator":"pkg:gem/"}]},{"name":"#ZipLibrary","SPDXID":"SPDXRef-Package-dotnet--ZipLibrary-a633e727244fae5e","versionInfo":"4.84.0.0","supplier":"NOASSERTION","downloadLocation":"NOASSERTION","filesAnalyzed":false,"sourceInfo":
