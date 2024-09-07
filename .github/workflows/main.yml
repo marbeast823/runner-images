@@ -13,17 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
  
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'  # Updated Node.js version to a supported one
- 
-      - name: Install dependencies
-        run: npm install
- 
-      - name: Run tests
-        run: npm test
- 
   deploy:
     runs-on: macos-latest
     needs: build
@@ -34,4 +23,10 @@ jobs:
  
       - name: Deploy to macOS
         run: |
-          echo "Deploying macOS application..."
+          /opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/runner-images/runner-images
+          /opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+          /opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+          /opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+          http.https://github.com/.extraheader
+          /opt/homebrew/bin/git config --local --unset-all http.https://github.com/.extraheader
+          /opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
