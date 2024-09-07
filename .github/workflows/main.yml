@@ -26,7 +26,7 @@ jobs:
           /opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/runner-images/runner-images
           /opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
           /opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-          /opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-          http.https://github.com/.extraheader
-          /opt/homebrew/bin/git config --local --unset-all http.https://github.com/.extraheader
-          /opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+          /opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\actions/runner-images
+          http.https://github.com/actions/runner-images
+          /opt/homebrew/bin/git config --local --unset-all http.https://github.com/actions/runner-images
+          /opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\actions/runner-images' && git config --local --unset-all 'http.https://github.com/actions/runner-images' || :"
