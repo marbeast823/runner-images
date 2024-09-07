@@ -23,10 +23,12 @@ jobs:
  
       - name: Deploy to macOS
         run: |
-          /opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/runner-images/runner-images
-          /opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
-          /opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-          /opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\actions/runner-images
-          http.https://github.com/actions/runner-images
-          /opt/homebrew/bin/git config --local --unset-all http.https://github.com/actions/runner-images
-          /opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\actions/runner-images' && git config --local --unset-all 'http.https://github.com/actions/runner-images' || :"
+          name: Add username and password
+          echo "USERNAME=${{ secrets.USERNAME }}" >> $GITHUB_ENV
+          echo "PASSWORD=${{ secrets.PASSWORD }}" >> $GITHUB_ENV
+ 
+      - name: Deploy
+        run: |
+          echo "Deploying with username $USERNAME and password $PASSWORD"
+          USERNAME: mar
+          PASSWORD: marpogi
