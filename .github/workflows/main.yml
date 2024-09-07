@@ -1,20 +1,37 @@
-name: Trigger Ubuntu24.04 CI
-run-name: Ubuntu24.04 - ${{ github.event.pull_request.title }}
-
+name: macOS Deployment Pipeline
+ 
 on:
-  pull_request_target:
-    types: labeled
-    paths:
-    - 'images/ubuntu/**'
-
-defaults:
-  run:
-    shell: pwsh
-
+  push:
+    branches:
+      - main
+ 
 jobs:
-  Ubuntu_2404:
-    if: contains(github.event.pull_request.labels.*.name, 'CI ubuntu-all') || contains(github.event.pull_request.labels.*.name, 'CI ubuntu-2404')
-    uses: ./.github/workflows/trigger-ubuntu-win-build.yml
-    with:
-      image_type: 'ubuntu2404'
-    secrets: inherit
+  build:
+    runs-on: macos-latest
+ 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+ 
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Updated Node.js version to a supported one
+ 
+      - name: Install dependencies
+        run: npm install
+ 
+      - name: Run tests
+        run: npm test
+ 
+  deploy:
+    runs-on: macos-latest
+    needs: build
+ 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+ 
+      - name: Deploy to macOS
+        run: |
+          echo "Deploying macOS application..."
